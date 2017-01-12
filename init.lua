@@ -9,7 +9,7 @@ local displayModalText = function(txt)
   alert(txt, 999999)
 end
 
-allowedApps = {"Emacs", "iTerm2"}
+allowedApps = {"Emacs", "Terminal"}
 hs.hints.showTitleThresh = 4
 hs.hints.titleMaxSize = 10
 hs.hints.fontSize = 30
@@ -21,6 +21,77 @@ local filterAllowedApps = function(w)
   end
   return true;
 end
+
+
+-- A global variable for the Hyper Mode
+k = hs.hotkey.modal.new({}, "F17")
+
+-- Trigger existing hyper key shortcuts
+
+k:bind({}, 'm', nil, function() hs.eventtap.keyStroke({"cmd","alt","shift","ctrl"}, 'm') end)
+
+
+-- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
+pressedF18 = function()
+   k.triggered = false
+   k:enter()
+end
+
+-- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
+--   send ESCAPE if no other keys are pressed.
+releasedF18 = function()
+   k:exit()
+   if not k.triggered then
+      hs.eventtap.keyStroke({}, 'ESC')
+   end
+end
+
+-- Bind the Hyper key
+f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+
+
+
+-- Hammerspoon config to send escape on short ctrl press
+-- https://gist.github.com/arbelt/b91e1f38a0880afb316dd5b5732759f1
+-- https://github.com/jasoncodes/dotfiles/blob/master/hammerspoon/control_escape.lua
+
+send_return = false
+last_mods = {}
+
+control_key_handler = function()
+   send_return = false
+end
+
+control_key_timer = hs.timer.delayed.new(0.15, control_key_handler)
+
+control_handler = function(evt)
+   local new_mods = evt:getFlags()
+   if last_mods["ctrl"] == new_mods["ctrl"] then
+      return false
+   end
+   if not last_mods["ctrl"] then
+      last_mods = new_mods
+      send_return = true
+      control_key_timer:start()
+   else
+      if send_return then
+         hs.eventtap.keyStroke({}, "RETURN")
+      end
+      last_mods = new_mods
+      control_key_timer:stop()
+   end
+   return false
+end
+
+control_tap = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, control_handler)
+control_tap:start()
+other_handler = function(evt)
+   send_return = false
+   return false
+end
+
+other_tap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, other_handler)
+other_tap:start()
 
 modals = {
   main = {
@@ -59,7 +130,7 @@ modals = {
       self.modal:bind("","escape", function() fsm:toIdle() end)
       self.modal:bind({"cmd"}, "space", nil, function() fsm:toMain() end)
       hs.fnutils.each({
-          { key = "t", app = "iTerm" },
+          { key = "t", app = "Terminal" },
           { key = "c", app = "Google Chrome" },
           { key = "b", app = "Brave" },
           { key = "e", app = "Emacs" },
