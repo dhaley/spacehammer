@@ -30,7 +30,7 @@ modals = {
       else
         self.modal = hs.hotkey.modal.new({"cmd"}, "space")
       end
-      self.modal:bind("","space", nil, function() fsm:toIdle(); windows.activateApp("Alfred 3") end)
+      self.modal:bind("","space", nil, function() fsm:toIdle(); windows.activateApp("LaunchBar") end)
       self.modal:bind("","w", nil, function() fsm:toWindows() end)
       self.modal:bind("","a", nil, function() fsm:toApps() end)
       self.modal:bind("","j", nil, function()

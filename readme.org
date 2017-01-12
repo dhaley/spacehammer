@@ -28,7 +28,7 @@ Hammerspoon is incredibly powerful tool, and it has allowed me to take my workfl
     - ~s~ - Slack
     - ~b~ - Brave
 
-*** ~Cmd SPC SPC~ - open Alfred search bar
+*** ~Cmd SPC SPC~ - open LaunchBar search bar
 
 ** Other features
 *** Slack Desktop Client enhancements
