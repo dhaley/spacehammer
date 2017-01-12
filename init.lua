@@ -126,7 +126,7 @@ modals = {
   apps = {
     init = function(self, fsm)
       self.modal = hs.hotkey.modal.new()
-      displayModalText "e \t emacs\nc \t chrome\nt \t terminal\ns \t slack\nb \t brave"
+      displayModalText "e \t emacs\nw \t safari\nm \t mail\nk \t karabiner\nc \t chrome\nt \t terminal\ns \t slack\nb \t brave"
       self.modal:bind("","escape", function() fsm:toIdle() end)
       self.modal:bind({"cmd"}, "space", nil, function() fsm:toMain() end)
       hs.fnutils.each({
@@ -134,6 +134,9 @@ modals = {
           { key = "c", app = "Google Chrome" },
           { key = "b", app = "Brave" },
           { key = "e", app = "Emacs" },
+          { key = "k", app = "Karabiner-Elements" },
+          { key = "m", app = "Mail" },
+          { key = "w", app = "Safari" },
           { key = "g", app = "Gitter" }}, function(item)
 
           self.modal:bind("", item.key, function() windows.activateApp(item.app); fsm:toIdle()  end)
