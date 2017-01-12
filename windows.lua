@@ -4,10 +4,10 @@ local windows = {}
 
 -- define window movement/resize operation mappings
 local arrowMap = {
-  k = { half = { 0, 0, 1,.5}, movement = { 0,-20}, complement = "h", resize = "Shorter" },
-  j = { half = { 0,.5, 1,.5}, movement = { 0, 20}, complement = "l", resize = "Taller" },
-  h = { half = { 0, 0,.5, 1}, movement = {-20, 0}, complement = "j", resize = "Thinner" },
-  l = { half = {.5, 0,.5, 1}, movement = { 20, 0}, complement = "k", resize = "Wider" },
+  t = { half = { 0, 0, 1,.5}, movement = { 0,-20}, complement = "d", resize = "Shorter" },
+  h = { half = { 0,.5, 1,.5}, movement = { 0, 20}, complement = "n", resize = "Taller" },
+  d = { half = { 0, 0,.5, 1}, movement = {-20, 0}, complement = "h", resize = "Thinner" },
+  n = { half = {.5, 0,.5, 1}, movement = { 20, 0}, complement = "t", resize = "Wider" },
 }
 
 -- compose screen quadrants from halves
@@ -35,8 +35,8 @@ windows.bind = function(modal, fsm)
   modal:bind("", "u", function() undo:pop() end)
 
   -- moving/re-sizing windows
-  hs.fnutils.each({"h", "l", "k", "j"}, function(arrow)
-      local dir = { h = "Left", j = "Down", k = "Up", l = "Right"}
+  hs.fnutils.each({"d", "n", "t", "h"}, function(arrow)
+      local dir = { d = "Left", h = "Down", t = "Up", n = "Right"}
       -- screen halves
       modal:bind({}, arrow, function()
           undo:push()
@@ -65,12 +65,12 @@ windows.bind = function(modal, fsm)
   end)
 
   -- jumping between windows
-  hs.fnutils.each({"h", "l", "k", "j"}, function(arrow)
+  hs.fnutils.each({"d", "n", "t", "h"}, function(arrow)
       modal:bind({"cmd"}, arrow, function()
-          if arrow == "h" then fw().filter.defaultCurrentSpace:focusWindowWest(nil, true, true) end
-          if arrow == "l" then fw().filter.defaultCurrentSpace:focusWindowEast(nil, true, true) end
-          if arrow == "j" then fw().filter.defaultCurrentSpace:focusWindowSouth(nil, true, true) end
-          if arrow == "k" then fw().filter.defaultCurrentSpace:focusWindowNorth(nil, true, true) end
+          if arrow == "d" then fw().filter.defaultCurrentSpace:focusWindowWest(nil, true, true) end
+          if arrow == "n" then fw().filter.defaultCurrentSpace:focusWindowEast(nil, true, true) end
+          if arrow == "h" then fw().filter.defaultCurrentSpace:focusWindowSouth(nil, true, true) end
+          if arrow == "t" then fw().filter.defaultCurrentSpace:focusWindowNorth(nil, true, true) end
           windows.highlighActiveWin()
       end)
   end)

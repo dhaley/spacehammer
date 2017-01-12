@@ -1,11 +1,11 @@
 local windows = require "windows"
 local previewAppKeys = {}
 
-hs.fnutils.each({{key = "j", dir = "down" }, { key = "k", dir = "up"}}, function(k)
+hs.fnutils.each({{key = "h", dir = "down" }, { key = "t", dir = "up"}}, function(k)
     local function scrollFn()
       hs.eventtap.keyStroke({""}, k.dir)
     end
-    -- pressing `j, k` for scrolling
+    -- pressing `h, t` for scrolling
     previewAppKeys[{key = k}] = hs.hotkey.new("", k.key, scrollFn, nil, scrollFn)
 end)
 

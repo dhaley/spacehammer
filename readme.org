@@ -6,17 +6,17 @@ git clone https://github.com/agzam/spacehammer ~/.hammerspoon
 
 ** Why?
  I love Vim keybindings and I needed to find a better, more efficient way to manage windows and jump between the apps.
- Ideally I wanted to stay in the home row and control as much as I can with ~HJKL~ keys. Adding tens (possibly hundreds) of key-combo shortcuts for every single desirable action is not a good solution.
+ Ideally I wanted to stay in the home row and control as much as I can with ~DHTN~ keys. Adding tens (possibly hundreds) of key-combo shortcuts for every single desirable action is not a good solution.
 
 Hammerspoon is incredibly powerful tool, and it has allowed me to take my workflow to a completely different level. Jumping between apps, controlling windows, searching things has become such a joyful experience. And no need to learn and memorize multitude of keystrokes. Or have to use the mouse or arrow keys.
 
 ** Keybindings 
 *** ~Cmd SPC w~ - Windows
-    - ~Cmd + hjkl~ - for jumping between application windows
-    - ~hjkl~ - moving windows around halves of the screen
+    - ~Cmd + dhtn~ - for jumping between application windows
+    - ~dhtn~ - moving windows around halves of the screen
     - ~n/p~ - moving to prev/next monitor
-    - ~Alt + hjkl~ - moving in increments
-    - ~Shift + hjkl~ - re-sizing active window
+    - ~Alt + dhtn~ - moving in increments
+    - ~Shift + dhtn~ - re-sizing active window
     - ~g~ - resizing with [[http://www.hammerspoon.org/docs/hs.grid.html][hs.grid]]
     - ~m~ - maximize active window
     - ~u~ - undo window operation 
@@ -33,12 +33,12 @@ Hammerspoon is incredibly powerful tool, and it has allowed me to take my workfl
 ** Other features
 *** Slack Desktop Client enhancements
      - Switching to Slack via "Apps" modal automatically opens Slack's "Jump to" dialog
-     - Scrolling current Slack thread with ~C-j~, ~C-k~
+     - Scrolling current Slack thread with ~C-h~, ~C-t~
      - Jumping to the end of the thread with ~C-g~
      - Adding emoji to the last message - ~Cmd-I~ (sorry, but default ~Cmd-Shift+\~ horribly inconvenient) 
 
 ** TODO: [0/7]
-   - [ ] ~jk~ for exiting modals
+   - [ ] ~ht~ for exiting modals
    - [ ] I'd like to find a way to jump to Chrome window with specific profile (right now ~Ctrl-Cmd SPC a b~ will switch to Chrome, but if you have multiple profiles you have to manually find the one you need) 
    - [ ] I use Chrome Dev-tools a lot, would be nice to automate things, e.g.: Keybinding that opens devtools and creates a vertical split with main window on the left and devtools on the right
    - [ ] Being able to enter selected passwords from keychain (not sure how I'm gonna do this one)
